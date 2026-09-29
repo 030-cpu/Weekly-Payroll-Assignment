@@ -1,4 +1,4 @@
-const employees = [
+const practiceEmployees = [
     {
         id: 1,
         firstName: "Maya",
@@ -49,15 +49,43 @@ const employees = [
     }
 ];
 
-// Assignment 1, payroll deductions State Tax:3.5%, Federal Tax: 10.0%, Social Security: 6.2%
-function calculatePayroll(employees) {
-   let weekOnePay = employees.hourlyRate * employees.weekOneHours;
-   console.log("Week One Pay Is " + weekOnePay);
+// A1 Deductions State Tax:3.5%, Federal Tax: 10.0%, Social Security: 6.2%
+function calculatePayroll(practiceEmployees) {
+    let totalPayout = 0;
+
+
+    for(let i=0; i< practiceEmployees.length; i++) {
+        const employee = practiceEmployees[i];
+
+        // week one pay
+        const weekOnePay = employee.weekOneHours * employee.hourlyRate;
+        // week two pay
+        const weekTwoPay = employee.weekTwoHours * employee.hourlyRate;
+
+        // gross earning
+        const grossEarnings = weekOnePay + weekTwoPay;
+
+        // deductions
+        const stateTax = grossEarnings * 0.035;
+        const federalTax = grossEarnings * 0.10;
+        const socialSecurity = grossEarnings * 0.062;
+
+        // total deductions
+        const totalDeductions = stateTax + federalTax + socialSecurity;
+
+        //net pay
+        const netPay = grossEarnings - totalDeductions;
+
+        totalPayout += netPay;
+
+        console.log(`${practiceEmployees[i].lastName}, ${practiceEmployees[i].firstName} | Gross Earnings: $${grossEarnings.toFixed(2)} | Net Pay: $${netPay.toFixed(2)}`)
+    }
+        console.log("");
+
+        console.log(`TOTAL PAYROLL PAYOUT: $${totalPayout.toFixed(2)}`);
 }
 
-calculatePayroll(employees);
-
-
+calculatePayroll(practiceEmployees);
 
 
 
